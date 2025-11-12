@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>50 Gier Przeglądarkowych ze Znajomymi - ULTRA Personalizacja</title>
+    <title data-i18n="title">50 Gier Przeglądarkowych ze Znajomymi - ULTRA Personalizacja i Tłumaczenia</title>
     <style>
         /* --- CSS: ZMIENNE I PODSTAWOWE STYLENIE --- */
         :root {
             /* Zmienne globalne i domyślne (Tryb Jasny) */
-            --primary-color: #007bff; /* Nowa zmienna dla koloru akcentującego */
+            --primary-color: #007bff;
             --bg-color: #f4f4f9;
             --text-color: #333;
             --header-bg: var(--primary-color);
@@ -17,7 +17,7 @@
             --game-bg: #ffffff;
             --border-color: #ccc;
             --font-size-base: 16px;
-            --font-family-base: 'Arial', sans-serif; /* Nowa zmienna dla czcionki */
+            --font-family-base: 'Arial', sans-serif;
         }
 
         /* Tryb Ciemny (Dark Mode) */
@@ -32,7 +32,7 @@
 
         /* Globalne style */
         body {
-            font-family: var(--font-family-base); /* Użycie zmiennej */
+            font-family: var(--font-family-base);
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -55,7 +55,7 @@
         }
 
         h2, h3 {
-            color: var(--primary-color); /* Użycie zmiennej */
+            color: var(--primary-color);
             border-bottom-color: var(--border-color);
         }
 
@@ -81,7 +81,7 @@
         .setting-control label {
             margin-right: 8px;
             font-weight: bold;
-            white-space: nowrap; /* Zapobiega łamaniu etykiet */
+            white-space: nowrap;
         }
         
         /* Pasek wyszukiwania */
@@ -106,7 +106,7 @@
         
         /* Lista Gier - Układ Lista (po zmianie w ustawieniach) */
         .game-list.list-view {
-            grid-template-columns: 1fr; /* Tylko jedna kolumna */
+            grid-template-columns: 1fr;
         }
 
         .game-item {
@@ -114,7 +114,7 @@
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid var(--primary-color); /* Użycie zmiennej */
+            border-left: 5px solid var(--primary-color);
             transition: transform 0.2s;
         }
         
@@ -134,7 +134,6 @@
 
         /* Styling dla przełączników (Switch/Toggle) */
         .switch {
-            /* ... (Styling pozostaje bez zmian, używa var(--primary-color) pod spodem) ... */
             position: relative;
             display: inline-block;
             width: 40px;
@@ -183,17 +182,27 @@
 <body>
 
     <header>
-        <h1>🎮 50 Gier Przeglądarkowych dla Przyjaciół 🤝</h1>
-        <p>Gry do wspólnej zabawy, które możesz dostosować do swojego stylu!</p>
+        <h1 data-i18n="title">🎮 50 Gier Przeglądarkowych dla Przyjaciół 🤝</h1>
+        <p data-i18n="subtitle">Gry do wspólnej zabawy, które możesz dostosować do swojego stylu!</p>
     </header>
 
     <main>
         
-        <h2>⚙️ Ustawienia i Personalizacja Strony</h2>
+        <h2 data-i18n="settings_header">⚙️ Ustawienia i Personalizacja Strony</h2>
         <div id="settings-panel">
             
             <div class="setting-control">
-                <label for="darkModeToggle">Tryb Ciemny/Jasny:</label>
+                <label for="language-switcher">Język (Language):</label>
+                <select id="language-switcher">
+                    <option value="pl">Polski (PL)</option>
+                    <option value="en">English (EN)</option>
+                    <option value="de">Deutsch (DE)</option>
+                    <option value="fr">Français (FR)</option>
+                    </select>
+            </div>
+            
+            <div class="setting-control">
+                <label for="darkModeToggle" data-i18n="dark_mode">Tryb Ciemny/Jasny:</label>
                 <label class="switch">
                     <input type="checkbox" id="darkModeToggle">
                     <span class="slider"></span>
@@ -201,30 +210,30 @@
             </div>
             
             <div class="setting-control">
-                <label for="fontSizeSelect">Rozmiar Czcionki:</label>
+                <label for="fontSizeSelect" data-i18n="font_size">Rozmiar Czcionki:</label>
                 <select id="fontSizeSelect">
-                    <option value="small">Mały</option>
-                    <option value="medium" selected>Średni</option>
-                    <option value="large">Duży</option>
+                    <option value="small" data-i18n="size_small">Mały</option>
+                    <option value="medium" selected data-i18n="size_medium">Średni</option>
+                    <option value="large" data-i18n="size_large">Duży</option>
                 </select>
             </div>
 
             <div class="setting-control">
-                <label for="fontFamilySelect">Rodzaj Czcionki:</label>
+                <label for="fontFamilySelect" data-i18n="font_family">Rodzaj Czcionki:</label>
                 <select id="fontFamilySelect">
-                    <option value="sans-serif" selected>Bezszeryfowa (Arial, domyślna)</option>
-                    <option value="serif">Szeryfowa (Times New Roman)</option>
-                    <option value="monospace">Monospace (Na kod)</option>
+                    <option value="sans-serif" selected data-i18n="font_sans">Bezszeryfowa</option>
+                    <option value="serif" data-i18n="font_serif">Szeryfowa</option>
+                    <option value="monospace" data-i18n="font_mono">Monospace</option>
                 </select>
             </div>
             
             <div class="setting-control">
-                <label for="primaryColorInput">Kolor Akcentu:</label>
+                <label for="primaryColorInput" data-i18n="color_accent">Kolor Akcentu:</label>
                 <input type="color" id="primaryColorInput" value="#007bff">
             </div>
 
             <div class="setting-control">
-                <label for="layoutToggle">Widok Lista/Siatka:</label>
+                <label for="layoutToggle" data-i18n="layout_toggle">Widok Lista/Siatka:</label>
                 <label class="switch">
                     <input type="checkbox" id="layoutToggle">
                     <span class="slider"></span>
@@ -232,88 +241,196 @@
             </div>
         </div>
         
-        <h2>🔍 Znajdź Grę</h2>
-        <input type="text" id="search-input" placeholder="Wyszukaj grę po nazwie...">
+        <h2 data-i18n="search_header">🔍 Znajdź Grę</h2>
+        <input type="text" id="search-input" data-i18n="search_placeholder" placeholder="Wyszukaj grę po nazwie...">
         
-        <h2>🕹️ Lista Gier Multiplayer (50 Tytułów)</h2>
+        <h2 data-i18n="games_header">🕹️ Lista Gier Multiplayer (50 Tytułów)</h2>
         <ul id="game-list" class="game-list">
-            <li class="game-item"><h3>1. Skribbl.io (Kalambury)</h3><p>Gra rysowania i zgadywania.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>2. Agar.io</h3><p>Zjadaj mniejsze komórki. Klasyk.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>3. Geoguessr</h3><p>Zgaduj lokalizacje na świecie.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>4. Slither.io</h3><p>Wężowa walka o dominację.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>5. Shell Shockers</h3><p>FPS, w którym sterujesz jajkiem.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>6. Krunker.io</h3><p>Szybki, pikselowy FPS.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>7. Freeciv-Web</h3><p>Strategia turowa a'la Civilization.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>8. Forge of Empires</h3><p>Strategia historyczna MMO.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>9. Margonem</h3><p>Polska, klasyczna gra MMORPG 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>10. 8 Ball Pool</h3><p>Bilard online 1 na 1.</p><a href="#" class="game-link">Zagraj!</a></li>
-            
-            <li class="game-item"><h3>11. Diep.io</h3><p>Akcja czołgami. Rozwijaj i strzelaj.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>12. PAPER.IO 2</h3><p>Zajmuj terytorium malując obszar.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>13. Worms Zone</h3><p>Rozbudowana gra o wężu.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>14. Fireboy and Watergirl</h3><p>Kooperacyjna gra logiczna.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>15. Chess Online</h3><p>Gra w szachy ze znajomym.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>16. Uno Online</h3><p>Wirtualna gra karciana Uno.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>17. Tanki Online</h3><p>Trójwymiarowa gra akcji czołgami.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>18. Surviv.io</h3><p>Dwuwymiarowe battle royale.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>19. Bloxd.io</h3><p>Minigry w stylu Minecrafta.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>20. Ogame</h3><p>Kosmiczna strategia MMO.</p><a href="#" class="game-link">Zagraj!</a></li>
-            
-            <li class="game-item"><h3>21. Town of Salem</h3><p>Gra dedukcyjna (podobnie jak Mafia).</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>22. HaxBall</h3><p>Piłka nożna za pomocą kulek 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>23. Mope.io</h3><p>Ewoluuj zwierzę i rywalizuj o przetrwanie.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>24. ZombsRoyale.io</h3><p>Izometryczny battle royale zombie.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>25. Lordz.io</h3><p>Strategia budowania armii.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>26. Tetr.io</h3><p>Wielosobowy Tetris, rywalizuj z przyjaciółmi.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>27. Colonist.io</h3><p>Nieoficjalna wersja Settlers of Catan.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>28. Codenames Online</h3><p>Gra słowna dla dwóch drużyn.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>29. Poker Online</h3><p>Karciany klasyk do gry w gronie znajomych.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>30. Drawize</h3><p>Alternatywna gra rysowania i zgadywania.</p><a href="#" class="game-link">Zagraj!</a></li>
-
-            <li class="game-item"><h3>31. Happy Wheels</h3><p>Zręcznościowa gra z fizyką ragdoll.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>32. Powerline.io</h3><p>Wąż na neonowej linii.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>33. Hole.io</h3><p>Steruj dziurą i połykaj miasto.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>34. Kilo.io</h3><p>Gra wieloosobowa o wzroście i dominacji.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>35. Tricky Test</h3><p>Wspólne rozwiązywanie podchwytliwych zagadek.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>36. Team Fortress 2 Classic (Web)</h3><p>Niektóre klony TF2 są dostępne w przeglądarce.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>37. Starve.io</h3><p>Przetrwanie i crafting w 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>38. Narwhale.io</h3><p>Narwale walczące rogami.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li classs="game-item"><h3>39. Little Big Snake</h3><p>Wężowa gra z elementami RPG.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>40. Gartic Phone</h3><p>Mieszanka rysowania i głuchy telefon.</p><a href="#" class="game-link">Zagraj!</a></li>
-
-            <li class="game-item"><h3>41. Curve Fever Pro</h3><p>Dynamiczna gra o liniach i unikaniu kolizji.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>42. Neocron 3 (Fan Web)</h3><p>Postapokaliptyczny MMORPG.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>43. Basketball Random</h3><p>Zabawna fizyka w koszykówce 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>44. Soccer Random</h3><p>Wariacja na temat piłki nożnej z losową fizyką.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>45. Poker Night</h3><p>Wspólna gra w pokera.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>46. Chess with Friends</h3><p>Szachy z dodatkowymi funkcjami społecznymi.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>47. Zombs.io</h3><p>Obrona bazy przed falami zombie.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>48. Warships.io</h3><p>Bitwy morskie w stylu .io.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>49. Pictionary multiplayer</h3><p>Jedna z wielu dostępnych wersji webowych.</p><a href="#" class="game-link">Zagraj!</a></li>
-            <li class="game-item"><h3>50. Star Wars: X-Wing vs TIE Fighter (Browser)</h3><p>Niektóre fanowskie klony kosmiczne.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>1. Skribbl.io (Kalambury)</h3><p>Gra rysowania i zgadywania.</p><a href="https://skribbl.io/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>2. Agar.io</h3><p>Zjadaj mniejsze komórki. Klasyk.</p><a href="https://agar.io/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>3. Geoguessr</h3><p>Zgaduj lokalizacje na świecie.</p><a href="https://www.geoguessr.com/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>4. Slither.io</h3><p>Wężowa walka o dominację.</p><a href="http://slither.io/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>5. Shell Shockers</h3><p>FPS, w którym sterujesz jajkiem.</p><a href="https://shellshock.io/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>6. Krunker.io</h3><p>Szybki, pikselowy FPS.</p><a href="https://krunker.io/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>7. Freeciv-Web</h3><p>Strategia turowa a'la Civilization.</p><a href="http://play.freeciv.org/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>8. Forge of Empires</h3><p>Strategia historyczna MMO.</p><a href="https://pl.forgeofempires.com/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>9. Margonem</h3><p>Polska, klasyczna gra MMORPG 2D.</p><a href="https://www.margonem.pl/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>10. Diep.io</h3><p>Akcja czołgami. Rozwijaj i strzelaj.</p><a href="https://diep.io/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>11. PAPER.IO 2</h3><p>Zajmuj terytorium malując obszar.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>12. Worms Zone</h3><p>Rozbudowana gra o wężu.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>13. Fireboy and Watergirl</h3><p>Kooperacyjna gra logiczna.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>14. Chess Online</h3><p>Gra w szachy ze znajomym.</p><a href="https://www.chess.com/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>15. Uno Online</h3><p>Wirtualna gra karciana Uno.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>16. Tanki Online</h3><p>Trójwymiarowa gra akcji czołgami.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>17. Surviv.io</h3><p>Dwuwymiarowe battle royale.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>18. Bloxd.io</h3><p>Minigry w stylu Minecrafta.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>19. Ogame</h3><p>Kosmiczna strategia MMO.</p><a href="https://www.ogame.pl/" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>20. Town of Salem</h3><p>Gra dedukcyjna (podobnie jak Mafia).</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>21. HaxBall</h3><p>Piłka nożna za pomocą kulek 2D.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>22. Mope.io</h3><p>Ewoluuj zwierzę i rywalizuj o przetrwanie.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>23. ZombsRoyale.io</h3><p>Izometryczny battle royale zombie.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>24. Lordz.io</h3><p>Strategia budowania armii.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>25. Tetr.io</h3><p>Wielosobowy Tetris, rywalizuj z przyjaciółmi.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>26. Colonist.io</h3><p>Nieoficjalna wersja Settlers of Catan.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>27. Codenames Online</h3><p>Gra słowna dla dwóch drużyn.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>28. Poker Online</h3><p>Karciany klasyk do gry w gronie znajomych.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>29. Drawize</h3><p>Alternatywna gra rysowania i zgadywania.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>30. Happy Wheels</h3><p>Zręcznościowa gra z fizyką ragdoll.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>31. Powerline.io</h3><p>Wąż na neonowej linii.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>32. Hole.io</h3><p>Steruj dziurą i połykaj miasto.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>33. Kilo.io</h3><p>Gra wieloosobowa o wzroście i dominacji.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>34. Tricky Test</h3><p>Wspólne rozwiązywanie podchwytliwych zagadek.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>35. Team Fortress 2 Classic (Web)</h3><p>Niektóre klony TF2 są dostępne w przeglądarce.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>36. Starve.io</h3><p>Przetrwanie i crafting w 2D.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>37. Narwhale.io</h3><p>Narwale walczące rogami.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>38. Little Big Snake</h3><p>Wężowa gra z elementami RPG.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>39. Gartic Phone</h3><p>Mieszanka rysowania i głuchy telefon.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>40. Curve Fever Pro</h3><p>Dynamiczna gra o liniach i unikaniu kolizji.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>41. Neocron 3 (Fan Web)</h3><p>Postapokaliptyczny MMORPG.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>42. Basketball Random</h3><p>Zabawna fizyka w koszykówce 2D.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>43. Soccer Random</h3><p>Wariacja na temat piłki nożnej z losową fizyką.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>44. Poker Night</h3><p>Wspólna gra w pokera.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>45. Chess with Friends</h3><p>Szachy z dodatkowymi funkcjami społecznymi.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>46. Zombs.io</h3><p>Obrona bazy przed falami zombie.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>47. Warships.io</h3><p>Bitwy morskie w stylu .io.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>48. Pictionary multiplayer</h3><p>Jedna z wielu dostępnych wersji webowych.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>49. Star Wars: X-Wing vs TIE Fighter (Browser)</h3><p>Niektóre fanowskie klony kosmiczne.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
+            <li class="game-item"><h3>50. Trimps</h3><p>Gra idle z elementami kooperacji.</p><a href="#" target="_blank" class="game-link" data-i18n="play_button">Zagraj!</a></li>
         </ul>
 
     </main>
 
     <footer>
-        <p style="text-align: center; margin-top: 50px; color: var(--text-color);">Strona stworzona i rozbudowana z pomocą AI.</p>
+        <p style="text-align: center; margin-top: 50px; color: var(--text-color);" data-i18n="footer_text">Strona stworzona i rozbudowana z pomocą AI.</p>
     </footer>
     
     <script>
         const body = document.body;
-        const root = document.documentElement.style; // Do zmiennych CSS
+        const root = document.documentElement.style;
         const gameList = document.getElementById('game-list');
         const gameItems = document.querySelectorAll('.game-item');
 
+        const languageSwitcher = document.getElementById('language-switcher');
         const darkModeToggle = document.getElementById('darkModeToggle');
         const fontSizeSelect = document.getElementById('fontSizeSelect');
         const fontFamilySelect = document.getElementById('fontFamilySelect');
         const primaryColorInput = document.getElementById('primaryColorInput');
         const layoutToggle = document.getElementById('layoutToggle');
         const searchInput = document.getElementById('search-input');
+        
+        // --- BAZA TŁUMACZEŃ DLA 4 JĘZYKÓW (możesz rozszerzyć do 25) ---
+        const translations = {
+            pl: {
+                title: "🎮 50 Gier Przeglądarkowych dla Przyjaciół 🤝",
+                subtitle: "Gry do wspólnej zabawy, które możesz dostosować do swojego stylu!",
+                settings_header: "⚙️ Ustawienia i Personalizacja Strony",
+                dark_mode: "Tryb Ciemny/Jasny:",
+                font_size: "Rozmiar Czcionki:",
+                size_small: "Mały",
+                size_medium: "Średni",
+                size_large: "Duży",
+                font_family: "Rodzaj Czcionki:",
+                font_sans: "Bezszeryfowa",
+                font_serif: "Szeryfowa",
+                font_mono: "Monospace",
+                color_accent: "Kolor Akcentu:",
+                layout_toggle: "Widok Lista/Siatka:",
+                search_header: "🔍 Znajdź Grę",
+                search_placeholder: "Wyszukaj grę po nazwie...",
+                games_header: "🕹️ Lista Gier Multiplayer (50 Tytułów)",
+                play_button: "Zagraj!",
+                footer_text: "Strona stworzona i rozbudowana z pomocą AI."
+            },
+            en: {
+                title: "🎮 50 Browser Games for Friends 🤝",
+                subtitle: "Games for shared fun that you can customize to your style!",
+                settings_header: "⚙️ Settings & Page Customization",
+                dark_mode: "Dark/Light Mode:",
+                font_size: "Font Size:",
+                size_small: "Small",
+                size_medium: "Medium",
+                size_large: "Large",
+                font_family: "Font Type:",
+                font_sans: "Sans-serif",
+                font_serif: "Serif",
+                font_mono: "Monospace",
+                color_accent: "Accent Color:",
+                layout_toggle: "List/Grid View:",
+                search_header: "🔍 Find a Game",
+                search_placeholder: "Search game by name...",
+                games_header: "🕹️ Multiplayer Games List (50 Titles)",
+                play_button: "Play!",
+                footer_text: "Page created and expanded with the help of AI."
+            },
+            de: {
+                title: "🎮 50 Browser-Spiele für Freunde 🤝",
+                subtitle: "Spiele für gemeinsamen Spaß, die du deinem Stil anpassen kannst!",
+                settings_header: "⚙️ Einstellungen & Seitenanpassung",
+                dark_mode: "Dunkel/Hell-Modus:",
+                font_size: "Schriftgröße:",
+                size_small: "Klein",
+                size_medium: "Mittel",
+                size_large: "Groß",
+                font_family: "Schrifttyp:",
+                font_sans: "Serifenlos",
+                font_serif: "Serif",
+                font_mono: "Monospace",
+                color_accent: "Akzentfarbe:",
+                layout_toggle: "Listen-/Rasteransicht:",
+                search_header: "🔍 Spiel finden",
+                search_placeholder: "Spiel nach Namen suchen...",
+                games_header: "🕹️ Multiplayer-Spieleliste (50 Titel)",
+                play_button: "Spielen!",
+                footer_text: "Seite erstellt und erweitert mit Hilfe von KI."
+            },
+            fr: {
+                title: "🎮 50 Jeux par navigateur pour Amis 🤝",
+                subtitle: "Des jeux pour un plaisir partagé que vous pouvez personnaliser à votre style!",
+                settings_header: "⚙️ Paramètres & Personnalisation de la Page",
+                dark_mode: "Mode Sombre/Clair:",
+                font_size: "Taille de la police:",
+                size_small: "Petit",
+                size_medium: "Moyen",
+                size_large: "Grand",
+                font_family: "Type de police:",
+                font_sans: "Sans sérif",
+                font_serif: "Sérif",
+                font_mono: "Monospace",
+                color_accent: "Couleur d'accentuation:",
+                layout_toggle: "Vue Liste/Grille:",
+                search_header: "🔍 Trouver un Jeu",
+                search_placeholder: "Rechercher un jeu par nom...",
+                games_header: "🕹️ Liste de Jeux Multijoueurs (50 Titres)",
+                play_button: "Jouer!",
+                footer_text: "Page créée et étendue à l'aide de l'IA."
+            }
+        };
 
-        // FUNKCJA ZAPISU I WCZYTYWANIA USTAWIEŃ
+        // --- FUNKCJA TŁUMACZENIA (i18n) ---
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            const texts = translations[lang];
+
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (texts[key]) {
+                    // Dla inputów (jak placeholder) i selectów (option value)
+                    if (el.tagName === 'INPUT' && el.getAttribute('placeholder')) {
+                        el.setAttribute('placeholder', texts[key]);
+                    } else if (el.tagName === 'OPTION') {
+                        el.textContent = texts[key];
+                    } else {
+                        el.textContent = texts[key];
+                    }
+                }
+            });
+            // Zapisz wybrany język
+            localStorage.setItem('language', lang);
+        }
+        
+        // --- FUNKCJE ZAPISU I WCZYTYWANIA USTAWIEŃ ---
         function saveSettings() {
+            // Tłumaczenie jest zapisywane w setLanguage
             localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
             localStorage.setItem('fontSize', fontSizeSelect.value);
             localStorage.setItem('fontFamily', fontFamilySelect.value);
@@ -322,35 +439,36 @@
         }
 
         function loadSettings() {
-            // Wczytaj Tryb Ciemny
+            // Wczytaj Język
+            const savedLang = localStorage.getItem('language') || 'pl';
+            languageSwitcher.value = savedLang;
+            setLanguage(savedLang);
+
+            // Wczytaj Personalizację
             const isDarkMode = localStorage.getItem('darkMode') === 'true';
             if (isDarkMode) {
                 body.classList.add('dark-mode');
                 darkModeToggle.checked = true;
             }
 
-            // Wczytaj Rozmiar Czcionki
             const savedFontSize = localStorage.getItem('fontSize');
             if (savedFontSize) {
                 fontSizeSelect.value = savedFontSize;
                 applyFontSize(savedFontSize);
             }
             
-            // Wczytaj Rodzaj Czcionki
             const savedFontFamily = localStorage.getItem('fontFamily');
             if (savedFontFamily) {
                 fontFamilySelect.value = savedFontFamily;
                 applyFontFamily(savedFontFamily);
             }
 
-            // Wczytaj Kolor Akcentu
             const savedPrimaryColor = localStorage.getItem('primaryColor');
             if (savedPrimaryColor) {
                 primaryColorInput.value = savedPrimaryColor;
                 applyPrimaryColor(savedPrimaryColor);
             }
             
-            // Wczytaj Układ Listy
             const isListView = localStorage.getItem('listView') === 'true';
             if (isListView) {
                 gameList.classList.add('list-view');
@@ -358,8 +476,7 @@
             }
         }
         
-        // --- FUNKCJE APLIKUJĄCE ZMIANY ---
-
+        // --- FUNKCJE APLIKUJĄCE ZMIANY (BEZ ZMIAN W TEJ CZĘŚCI) ---
         function applyFontSize(size) {
             let baseSize;
             switch(size) {
@@ -382,12 +499,15 @@
         
         function applyPrimaryColor(color) {
             root.setProperty('--primary-color', color);
-            // Aby header miał ten sam kolor, musimy go też zaktualizować (choć jest to ustawione na var(--primary-color))
             root.setProperty('--header-bg', color);
         }
         
-        // --- OBSŁUGA ZDARZEŃ PERSONALIZACJI ---
+        // --- OBSŁUGA ZDARZEŃ ---
         
+        languageSwitcher.addEventListener('change', (event) => {
+            setLanguage(event.target.value);
+        });
+
         darkModeToggle.addEventListener('change', () => {
             body.classList.toggle('dark-mode');
             saveSettings();
@@ -413,17 +533,15 @@
             saveSettings();
         });
 
-        // --- OBSŁUGA WYSZUKIWANIA/FILTROWANIA ---
-
         searchInput.addEventListener('keyup', () => {
             const filter = searchInput.value.toLowerCase();
             
             gameItems.forEach(item => {
                 const text = item.textContent || item.innerText;
                 if (text.toLowerCase().indexOf(filter) > -1) {
-                    item.style.display = ""; // Pokaż element
+                    item.style.display = "";
                 } else {
-                    item.style.display = "none"; // Ukryj element
+                    item.style.display = "none";
                 }
             });
         });
