@@ -1,62 +1,436 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moje Gry</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
-      padding: 50px;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1rem;
-      color: #555;
-    }
-    .game {
-      margin: 30px 0;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .game h2 {
-      margin-bottom: 15px;
-    }
-    .game a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .game a:hover {
-      background-color: #0056b3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Gier Przeglądarkowych ze Znajomymi - ULTRA Personalizacja</title>
+    <style>
+        /* --- CSS: ZMIENNE I PODSTAWOWE STYLENIE --- */
+        :root {
+            /* Zmienne globalne i domyślne (Tryb Jasny) */
+            --primary-color: #007bff; /* Nowa zmienna dla koloru akcentującego */
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --header-bg: var(--primary-color);
+            --link-color: var(--primary-color);
+            --panel-bg: #e0e0e0;
+            --game-bg: #ffffff;
+            --border-color: #ccc;
+            --font-size-base: 16px;
+            --font-family-base: 'Arial', sans-serif; /* Nowa zmienna dla czcionki */
+        }
+
+        /* Tryb Ciemny (Dark Mode) */
+        body.dark-mode {
+            --bg-color: #1a1a2e;
+            --text-color: #e4e6eb;
+            --link-color: #64b5f6;
+            --panel-bg: #2d2d44;
+            --game-bg: #37375a;
+            --border-color: #4a4a6e;
+        }
+
+        /* Globalne style */
+        body {
+            font-family: var(--font-family-base); /* Użycie zmiennej */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: var(--font-size-base);
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2, h3 {
+            color: var(--primary-color); /* Użycie zmiennej */
+            border-bottom-color: var(--border-color);
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+
+        /* Sekcja Ustawień/Personalizacji */
+        #settings-panel {
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .setting-control label {
+            margin-right: 8px;
+            font-weight: bold;
+            white-space: nowrap; /* Zapobiega łamaniu etykiet */
+        }
+        
+        /* Pasek wyszukiwania */
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background-color: var(--game-bg);
+            color: var(--text-color);
+        }
+
+        /* Lista Gier - Układ Siatka (domyślny) */
+        .game-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Lista Gier - Układ Lista (po zmianie w ustawieniach) */
+        .game-list.list-view {
+            grid-template-columns: 1fr; /* Tylko jedna kolumna */
+        }
+
+        .game-item {
+            background-color: var(--game-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary-color); /* Użycie zmiennej */
+            transition: transform 0.2s;
+        }
+        
+        .game-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .game-item h3 {
+            margin-top: 0;
+        }
+
+        .game-item a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Styling dla przełączników (Switch/Toggle) */
+        .switch {
+            /* ... (Styling pozostaje bez zmian, używa var(--primary-color) pod spodem) ... */
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+    </style>
 </head>
 <body>
 
-  <h1>🎮 Moje Gry</h1>
-  <p>Kliknij przyciski, aby pobrać gry z Google Drive</p>
+    <header>
+        <h1>🎮 50 Gier Przeglądarkowych dla Przyjaciół 🤝</h1>
+        <p>Gry do wspólnej zabawy, które możesz dostosować do swojego stylu!</p>
+    </header>
 
-  <div class="game">
-    <h2>Gra 1: Papas Pizzeria HD</h2>
-    <a href="https://drive.google.com/file/d/1mJfZaV2QF5RI8ZhgIhV1XPMJURyDxhjf/view?usp=sharing" target="_blank">Pobierz</a>
-  </div>
+    <main>
+        
+        <h2>⚙️ Ustawienia i Personalizacja Strony</h2>
+        <div id="settings-panel">
+            
+            <div class="setting-control">
+                <label for="darkModeToggle">Tryb Ciemny/Jasny:</label>
+                <label class="switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="setting-control">
+                <label for="fontSizeSelect">Rozmiar Czcionki:</label>
+                <select id="fontSizeSelect">
+                    <option value="small">Mały</option>
+                    <option value="medium" selected>Średni</option>
+                    <option value="large">Duży</option>
+                </select>
+            </div>
 
-  <div class="game">
-    <h2>Gra 2: Hello Neighbor Prototype</h2>
-    <a href="https://drive.google.com/file/d/1q_bd-CBEDPvy4I1BzWmx_1j4Xb-ibeVB/view?usp=sharing" target="_blank">Pobierz</a>
-  </div>
+            <div class="setting-control">
+                <label for="fontFamilySelect">Rodzaj Czcionki:</label>
+                <select id="fontFamilySelect">
+                    <option value="sans-serif" selected>Bezszeryfowa (Arial, domyślna)</option>
+                    <option value="serif">Szeryfowa (Times New Roman)</option>
+                    <option value="monospace">Monospace (Na kod)</option>
+                </select>
+            </div>
+            
+            <div class="setting-control">
+                <label for="primaryColorInput">Kolor Akcentu:</label>
+                <input type="color" id="primaryColorInput" value="#007bff">
+            </div>
+
+            <div class="setting-control">
+                <label for="layoutToggle">Widok Lista/Siatka:</label>
+                <label class="switch">
+                    <input type="checkbox" id="layoutToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <h2>🔍 Znajdź Grę</h2>
+        <input type="text" id="search-input" placeholder="Wyszukaj grę po nazwie...">
+        
+        <h2>🕹️ Lista Gier Multiplayer (50 Tytułów)</h2>
+        <ul id="game-list" class="game-list">
+            <li class="game-item"><h3>1. Skribbl.io (Kalambury)</h3><p>Gra rysowania i zgadywania.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>2. Agar.io</h3><p>Zjadaj mniejsze komórki. Klasyk.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>3. Geoguessr</h3><p>Zgaduj lokalizacje na świecie.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>4. Slither.io</h3><p>Wężowa walka o dominację.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>5. Shell Shockers</h3><p>FPS, w którym sterujesz jajkiem.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>6. Krunker.io</h3><p>Szybki, pikselowy FPS.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>7. Freeciv-Web</h3><p>Strategia turowa a'la Civilization.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>8. Forge of Empires</h3><p>Strategia historyczna MMO.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>9. Margonem</h3><p>Polska, klasyczna gra MMORPG 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>10. 8 Ball Pool</h3><p>Bilard online 1 na 1.</p><a href="#" class="game-link">Zagraj!</a></li>
+            
+            <li class="game-item"><h3>11. Diep.io</h3><p>Akcja czołgami. Rozwijaj i strzelaj.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>12. PAPER.IO 2</h3><p>Zajmuj terytorium malując obszar.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>13. Worms Zone</h3><p>Rozbudowana gra o wężu.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>14. Fireboy and Watergirl</h3><p>Kooperacyjna gra logiczna.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>15. Chess Online</h3><p>Gra w szachy ze znajomym.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>16. Uno Online</h3><p>Wirtualna gra karciana Uno.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>17. Tanki Online</h3><p>Trójwymiarowa gra akcji czołgami.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>18. Surviv.io</h3><p>Dwuwymiarowe battle royale.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>19. Bloxd.io</h3><p>Minigry w stylu Minecrafta.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>20. Ogame</h3><p>Kosmiczna strategia MMO.</p><a href="#" class="game-link">Zagraj!</a></li>
+            
+            <li class="game-item"><h3>21. Town of Salem</h3><p>Gra dedukcyjna (podobnie jak Mafia).</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>22. HaxBall</h3><p>Piłka nożna za pomocą kulek 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>23. Mope.io</h3><p>Ewoluuj zwierzę i rywalizuj o przetrwanie.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>24. ZombsRoyale.io</h3><p>Izometryczny battle royale zombie.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>25. Lordz.io</h3><p>Strategia budowania armii.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>26. Tetr.io</h3><p>Wielosobowy Tetris, rywalizuj z przyjaciółmi.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>27. Colonist.io</h3><p>Nieoficjalna wersja Settlers of Catan.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>28. Codenames Online</h3><p>Gra słowna dla dwóch drużyn.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>29. Poker Online</h3><p>Karciany klasyk do gry w gronie znajomych.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>30. Drawize</h3><p>Alternatywna gra rysowania i zgadywania.</p><a href="#" class="game-link">Zagraj!</a></li>
+
+            <li class="game-item"><h3>31. Happy Wheels</h3><p>Zręcznościowa gra z fizyką ragdoll.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>32. Powerline.io</h3><p>Wąż na neonowej linii.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>33. Hole.io</h3><p>Steruj dziurą i połykaj miasto.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>34. Kilo.io</h3><p>Gra wieloosobowa o wzroście i dominacji.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>35. Tricky Test</h3><p>Wspólne rozwiązywanie podchwytliwych zagadek.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>36. Team Fortress 2 Classic (Web)</h3><p>Niektóre klony TF2 są dostępne w przeglądarce.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>37. Starve.io</h3><p>Przetrwanie i crafting w 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>38. Narwhale.io</h3><p>Narwale walczące rogami.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li classs="game-item"><h3>39. Little Big Snake</h3><p>Wężowa gra z elementami RPG.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>40. Gartic Phone</h3><p>Mieszanka rysowania i głuchy telefon.</p><a href="#" class="game-link">Zagraj!</a></li>
+
+            <li class="game-item"><h3>41. Curve Fever Pro</h3><p>Dynamiczna gra o liniach i unikaniu kolizji.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>42. Neocron 3 (Fan Web)</h3><p>Postapokaliptyczny MMORPG.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>43. Basketball Random</h3><p>Zabawna fizyka w koszykówce 2D.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>44. Soccer Random</h3><p>Wariacja na temat piłki nożnej z losową fizyką.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>45. Poker Night</h3><p>Wspólna gra w pokera.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>46. Chess with Friends</h3><p>Szachy z dodatkowymi funkcjami społecznymi.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>47. Zombs.io</h3><p>Obrona bazy przed falami zombie.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>48. Warships.io</h3><p>Bitwy morskie w stylu .io.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>49. Pictionary multiplayer</h3><p>Jedna z wielu dostępnych wersji webowych.</p><a href="#" class="game-link">Zagraj!</a></li>
+            <li class="game-item"><h3>50. Star Wars: X-Wing vs TIE Fighter (Browser)</h3><p>Niektóre fanowskie klony kosmiczne.</p><a href="#" class="game-link">Zagraj!</a></li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <p style="text-align: center; margin-top: 50px; color: var(--text-color);">Strona stworzona i rozbudowana z pomocą AI.</p>
+    </footer>
+    
+    <script>
+        const body = document.body;
+        const root = document.documentElement.style; // Do zmiennych CSS
+        const gameList = document.getElementById('game-list');
+        const gameItems = document.querySelectorAll('.game-item');
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const fontSizeSelect = document.getElementById('fontSizeSelect');
+        const fontFamilySelect = document.getElementById('fontFamilySelect');
+        const primaryColorInput = document.getElementById('primaryColorInput');
+        const layoutToggle = document.getElementById('layoutToggle');
+        const searchInput = document.getElementById('search-input');
+
+        // FUNKCJA ZAPISU I WCZYTYWANIA USTAWIEŃ
+        function saveSettings() {
+            localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+            localStorage.setItem('fontSize', fontSizeSelect.value);
+            localStorage.setItem('fontFamily', fontFamilySelect.value);
+            localStorage.setItem('primaryColor', primaryColorInput.value);
+            localStorage.setItem('listView', gameList.classList.contains('list-view'));
+        }
+
+        function loadSettings() {
+            // Wczytaj Tryb Ciemny
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                darkModeToggle.checked = true;
+            }
+
+            // Wczytaj Rozmiar Czcionki
+            const savedFontSize = localStorage.getItem('fontSize');
+            if (savedFontSize) {
+                fontSizeSelect.value = savedFontSize;
+                applyFontSize(savedFontSize);
+            }
+            
+            // Wczytaj Rodzaj Czcionki
+            const savedFontFamily = localStorage.getItem('fontFamily');
+            if (savedFontFamily) {
+                fontFamilySelect.value = savedFontFamily;
+                applyFontFamily(savedFontFamily);
+            }
+
+            // Wczytaj Kolor Akcentu
+            const savedPrimaryColor = localStorage.getItem('primaryColor');
+            if (savedPrimaryColor) {
+                primaryColorInput.value = savedPrimaryColor;
+                applyPrimaryColor(savedPrimaryColor);
+            }
+            
+            // Wczytaj Układ Listy
+            const isListView = localStorage.getItem('listView') === 'true';
+            if (isListView) {
+                gameList.classList.add('list-view');
+                layoutToggle.checked = true;
+            }
+        }
+        
+        // --- FUNKCJE APLIKUJĄCE ZMIANY ---
+
+        function applyFontSize(size) {
+            let baseSize;
+            switch(size) {
+                case 'small': baseSize = '14px'; break;
+                case 'large': baseSize = '18px'; break;
+                default: baseSize = '16px';
+            }
+            root.setProperty('--font-size-base', baseSize);
+        }
+
+        function applyFontFamily(family) {
+            let fontStack;
+            switch(family) {
+                case 'serif': fontStack = 'Georgia, "Times New Roman", Times, serif'; break;
+                case 'monospace': fontStack = '"Courier New", Courier, monospace'; break;
+                default: fontStack = 'Arial, sans-serif';
+            }
+            root.setProperty('--font-family-base', fontStack);
+        }
+        
+        function applyPrimaryColor(color) {
+            root.setProperty('--primary-color', color);
+            // Aby header miał ten sam kolor, musimy go też zaktualizować (choć jest to ustawione na var(--primary-color))
+            root.setProperty('--header-bg', color);
+        }
+        
+        // --- OBSŁUGA ZDARZEŃ PERSONALIZACJI ---
+        
+        darkModeToggle.addEventListener('change', () => {
+            body.classList.toggle('dark-mode');
+            saveSettings();
+        });
+
+        fontSizeSelect.addEventListener('change', (event) => {
+            applyFontSize(event.target.value);
+            saveSettings();
+        });
+        
+        fontFamilySelect.addEventListener('change', (event) => {
+            applyFontFamily(event.target.value);
+            saveSettings();
+        });
+        
+        primaryColorInput.addEventListener('input', (event) => {
+            applyPrimaryColor(event.target.value);
+            saveSettings();
+        });
+        
+        layoutToggle.addEventListener('change', () => {
+            gameList.classList.toggle('list-view');
+            saveSettings();
+        });
+
+        // --- OBSŁUGA WYSZUKIWANIA/FILTROWANIA ---
+
+        searchInput.addEventListener('keyup', () => {
+            const filter = searchInput.value.toLowerCase();
+            
+            gameItems.forEach(item => {
+                const text = item.textContent || item.innerText;
+                if (text.toLowerCase().indexOf(filter) > -1) {
+                    item.style.display = ""; // Pokaż element
+                } else {
+                    item.style.display = "none"; // Ukryj element
+                }
+            });
+        });
+
+        // Wczytaj wszystkie ustawienia po załadowaniu strony
+        loadSettings();
+    </script>
 
 </body>
 </html>
